@@ -11,7 +11,7 @@ const Navbar = () => {
           <h2 className="text-2xl font-bold bg-custom-gradient text-transparent bg-clip-text">
             Internship
           </h2>
-          <ul className="items-stretch hidden space-x-3 lg:flex">
+          <ul className="items-stretch text-sm hidden space-x-3 lg:flex">
             <li className="flex">
               <Link to="/">
                 <a

@@ -1,7 +1,7 @@
 import { FaDiceD6 } from "react-icons/fa";
 
 
-const Cards = () => {
+const Cards = ({total}) => {
   return (
     <div>
       <div className=" p-5 rounded-3xl shadow-md border border-[#77FED6]">
@@ -16,7 +16,7 @@ const Cards = () => {
         />
         <div className="mt-6 mb-2">
           <h2 className="text-xl text-white font-semibold tracking-wide">
-            Total: $299
+            Total: ${total}
           </h2>
         </div>
         <div className="mt-5">
