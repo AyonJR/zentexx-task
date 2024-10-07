@@ -12,9 +12,7 @@ function App() {
       <div>
         <Outlet></Outlet>
       </div>
-      <div className="mt-40">
-        <Footer></Footer>
-      </div>
+    
 
     </div>
   );

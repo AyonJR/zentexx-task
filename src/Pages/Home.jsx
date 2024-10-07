@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Cards from "../layout/Cards";
 import Funding from "../layout/Funding";
 import axios from "axios";
+import Footer from "../layout/Footer";
 
 const Home = () => {
   const [standardFunding, setStandardFunding] = useState([]);
@@ -74,7 +75,7 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="mt-40">
+    <div className="mt-32">
       <div className="flex justify-center">
         <h2 className="text-white font-semibold text-3xl">
           Pick Your Funding Programs
@@ -178,6 +179,9 @@ const Home = () => {
         <div className="w-1/3 mr-20">
           <Cards total={total} />
         </div>
+      </div>
+      <div className="mt-40">
+        <Footer></Footer>
       </div>
     </div>
   );

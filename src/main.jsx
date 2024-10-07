@@ -4,6 +4,7 @@ import App from "./App.jsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 import Home from "./Pages/Home.jsx";
+import CheckOut from "./Pages/CheckOut.jsx";
 
 const router = createBrowserRouter([
   {
@@ -14,6 +15,10 @@ const router = createBrowserRouter([
         path:"/",
         element:<Home></Home>
       } ,
+      {
+        path: "/checkout/:total",
+        element: <CheckOut></CheckOut>, 
+      },
     ]
   },
 ]);
