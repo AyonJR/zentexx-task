@@ -9,21 +9,18 @@ const Home = () => {
   const [instantFunding, setInstantFunding] = useState([]);
   const [selectedButton, setSelectedButton] = useState("");
   const [selectedPricing, setSelectedPricing] = useState([]);
-  const [selectedPricingButton, setSelectedPricingButton] = useState("");
+  const [filteredPricing, setFilteredPricing] = useState([]); // State for filtered pricing
+  const [price, setPrice] = useState([]);
 
-
-  const data2 = selectedPricing.length > 0 ? selectedPricing[0] : {};
-  const total = data2.r7 
-  console.log(total)
-
+  const data2 = filteredPricing.length > 0 ? filteredPricing[0] : {};
+  const total = data2.r7;
+  console.log(total);
 
   // Standard Funding
   const handleStandardFunding = () => {
     const fetchStandardFunding = async () => {
       try {
-        const response = await axios.get(
-          "http://localhost:5000/standardFunding"
-        );
+        const response = await axios.get("http://localhost:5000/standardFunding");
         setStandardFunding(response.data);
       } catch (error) {
         console.error("Error fetching standard funding data:", error);
@@ -38,9 +35,7 @@ const Home = () => {
   const handleInstantFunding = () => {
     const fetchInstantFunding = async () => {
       try {
-        const response = await axios.get(
-          "http://localhost:5000/instantFunding"
-        );
+        const response = await axios.get("http://localhost:5000/instantFunding");
         setInstantFunding(response.data);
       } catch (error) {
         console.error("Error fetching instant funding data:", error);
@@ -51,27 +46,43 @@ const Home = () => {
     setSelectedButton("instant");
   };
 
-  // Fetch pricing data
-  const fetchPricingData = async (endpoint, pricingButton) => {
-    try {
-      const response = await axios.get(`http://localhost:5000/${endpoint}`);
-      setSelectedPricing(response.data);
-      setSelectedPricingButton(pricingButton);
-    } catch (error) {
-      console.error("Error fetching pricing data:", error);
-    }
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`http://localhost:5000/price`);
+        setPrice(response.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  console.log(price);
+
+  // Function to filter pricing data based on button click
+  const filterPricingData = (amount) => {
+    const rowMap = {
+      "10000": "first",
+      "20000": "second",
+      "30000": "third",
+      "50000": "fourth",
+      "60000": "fifth",
+    };
+
+    const filtered = price.filter((item) => item.row === rowMap[amount]);
+    setFilteredPricing(filtered);
   };
 
-  // Pricing handlers
-  const handleP10 = () => fetchPricingData("p10", "p10");
-  const handleP20 = () => fetchPricingData("p20", "p20");
-  const handleP30 = () => fetchPricingData("p30", "p30");
-  const handleP40 = () => fetchPricingData("p40", "p40");
-  const handleP50 = () => fetchPricingData("p50", "p50");
+  useEffect(() => {
+    if (price.length > 0) {
+      filterPricingData("10000"); 
+    }
+  }, [price]); 
 
   useEffect(() => {
-    handleStandardFunding();
-    handleP10()
+    handleStandardFunding(); 
   }, []);
 
   return (
@@ -81,6 +92,7 @@ const Home = () => {
           Pick Your Funding Programs
         </h2>
       </div>
+
       {/* Funding options */}
       <div className="flex justify-center mt-8">
         <div className="flex gap-5 text-[#77FED6]">
@@ -112,9 +124,9 @@ const Home = () => {
       <div className="mt-5 flex justify-center">
         <div className="flex gap-5 text-[#77FED6]">
           <button
-            onClick={handleP10}
+            onClick={() => filterPricingData("10000")}
             className={`w-[140px] border border-[#77FED6] py-2 rounded-3xl ${
-              selectedPricingButton === "p10"
+              filteredPricing.length > 0 && filteredPricing[0]?.row === "first"
                 ? "bg-custom-gradient border-0 text-white"
                 : ""
             }`}
@@ -122,9 +134,9 @@ const Home = () => {
             $10,000
           </button>
           <button
-            onClick={handleP20}
+            onClick={() => filterPricingData("20000")}
             className={`w-[130px] border border-[#77FED6] py-2 rounded-3xl ${
-              selectedPricingButton === "p20"
+              filteredPricing.length > 0 && filteredPricing[0]?.row === "second"
                 ? "bg-custom-gradient border-0 text-white"
                 : ""
             }`}
@@ -132,9 +144,9 @@ const Home = () => {
             $20,000
           </button>
           <button
-            onClick={handleP30}
+            onClick={() => filterPricingData("30000")}
             className={`w-[130px] border border-[#77FED6] py-2 rounded-3xl ${
-              selectedPricingButton === "p30"
+              filteredPricing.length > 0 && filteredPricing[0]?.row === "third"
                 ? "bg-custom-gradient border-0 text-white"
                 : ""
             }`}
@@ -142,9 +154,9 @@ const Home = () => {
             $30,000
           </button>
           <button
-            onClick={handleP40}
+            onClick={() => filterPricingData("50000")}
             className={`w-[130px] border border-[#77FED6] py-2 rounded-3xl ${
-              selectedPricingButton === "p40"
+              filteredPricing.length > 0 && filteredPricing[0]?.row === "fourth"
                 ? "bg-custom-gradient border-0 text-white"
                 : ""
             }`}
@@ -152,9 +164,9 @@ const Home = () => {
             $50,000
           </button>
           <button
-            onClick={handleP50}
+            onClick={() => filterPricingData("60000")}
             className={`w-[130px] border border-[#77FED6] py-2 rounded-3xl ${
-              selectedPricingButton === "p50"
+              filteredPricing.length > 0 && filteredPricing[0]?.row === "fifth"
                 ? "bg-custom-gradient border-0 text-white"
                 : ""
             }`}
@@ -168,10 +180,8 @@ const Home = () => {
       <div className="flex w-full mt-10 gap-10">
         <div className="w-2/3 ml-20">
           <Funding
-            fundingData={
-              selectedButton === "standard" ? standardFunding : instantFunding
-            }
-            pricingData={selectedPricing}
+            fundingData={selectedButton === "standard" ? standardFunding : instantFunding}
+            pricingData={filteredPricing} 
           />
         </div>
 
@@ -181,7 +191,7 @@ const Home = () => {
         </div>
       </div>
       <div className="mt-40">
-        <Footer></Footer>
+        <Footer />
       </div>
     </div>
   );

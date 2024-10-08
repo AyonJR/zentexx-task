@@ -1,3 +1,6 @@
+import { SiStartrek } from "react-icons/si";
+
+
 const Payment = () => {
   return (
     <div>
@@ -76,6 +79,7 @@ const Payment = () => {
       {/* Tazapay card */}
 
       <div>
+
         <div className="relative p-[1px] mt-10 rounded-xl ">
           <div className="p-5 rounded-xl shadow-md bg-[#050907]">
             <label className="flex items-center  cursor-pointer">
@@ -117,16 +121,19 @@ const Payment = () => {
             </div>
           </div>
         </div>
-      </div>
-
-      {/* pay button */}
-      <div className="mx-5">
+        <div className="mx-5">
       <button
             className="w-full bg-custom-gradient font-semibold text-white rounded-md py-2 flex items-center justify-center gap-2"
           >
-            Start Challenge
+            <SiStartrek className="text-xl"></SiStartrek>
+            Proceed to Payment
           </button>
       </div>
+      
+      </div>
+
+      {/* pay button */}
+     
     </div>
   );
 };

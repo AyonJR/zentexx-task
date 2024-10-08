@@ -1,8 +1,10 @@
+import React from "react";
 import { RiApps2AddFill } from "react-icons/ri";
-import { Link, useLocation } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom"; // Use NavLink instead of Link
+import { useAuth } from "../authentication/AuthContext";
 
 const Navbar = () => {
-  const location = useLocation();
+  const { isAdmin, logout } = useAuth();
 
   return (
     <div>
@@ -11,91 +13,75 @@ const Navbar = () => {
           <h2 className="text-2xl font-bold bg-custom-gradient text-transparent bg-clip-text">
             Internship
           </h2>
-          <ul className="items-stretch text-sm hidden space-x-3 lg:flex">
-            <li className="flex">
-              <Link to="/">
-                <a
-                  rel="noopener noreferrer"
-                  className={`flex items-center px-4 -mb-1 ${
-                    location.pathname === "/" 
-                      ? "bg-custom-gradient text-transparent bg-clip-text" 
-                      : "text-white"
-                  }`}
-                >
-                  Home
+          <ul className="flex items-center lg:gap-3 text-sm ">
+            <li>
+              {/* Use NavLink to conditionally apply styles */}
+              <NavLink
+                to="/"
+                className={({ isActive }) =>
+                  isActive
+                    ? "flex items-center px-4 -mb-1 bg-custom-gradient text-transparent bg-clip-text"
+                    : "flex items-center px-4 -mb-1 text-white"
+                }
+              >
+                Home
+              </NavLink>
+            </li>
+
+            {isAdmin ? (
+              <Link to={'/updateDelete'}>
+              <li className="flex items-center px-4 -mb-1">
+                <a href="#" className=" text-[#007991] font-semibold hover:text-gray-300">
+                  Admin 
                 </a>
+              </li>
               </Link>
-            </li>
-            <li className="flex">
-              <a
-                rel="noopener noreferrer"
-                href="#"
-                className="flex items-center px-4 -mb-1 text-white"
-              >
-                About us
-              </a>
-            </li>
-            <li className="flex">
-              <a
-                rel="noopener noreferrer"
-                href="#"
-                className="flex items-center px-4 -mb-1 text-white"
-              >
+            ) : (
+              <li className="flex items-center px-4 -mb-1">
+                <a href="#" className="text-white hover:text-gray-300">
+                   About Us
+                </a>
+              </li>
+            )}
+
+            <li className="flex items-center px-4 -mb-1">
+              <a href="#" className="text-white hover:text-gray-300">
                 Products
               </a>
             </li>
-            <li className="flex">
-              <a
-                rel="noopener noreferrer"
-                href="#"
-                className="flex items-center px-4 -mb-1 text-white"
-              >
+
+            <li className="flex items-center px-4 -mb-1">
+              <a href="#" className="text-white hover:text-gray-300">
                 Payouts
               </a>
             </li>
-            <li className="flex">
-              <a
-                rel="noopener noreferrer"
-                href="#"
-                className="flex items-center px-4 -mb-1 text-white"
-              >
+
+            <li className="flex items-center px-4 -mb-1">
+              <a href="#" className="text-white hover:text-gray-300">
                 Affiliate
               </a>
             </li>
-            <li className="flex">
-              <a
-                rel="noopener noreferrer"
-                href="#"
-                className="flex items-center px-4 -mb-1 text-white"
-              >
+
+            <li className="flex items-center px-4 -mb-1">
+              <a href="#" className="text-white hover:text-gray-300">
                 Help Center
               </a>
             </li>
           </ul>
+
           <div className="items-center flex-shrink-0 hidden lg:flex">
             <div className="p-[2px] rounded-3xl bg-gradient-to-r from-[#007991] to-[#77FED6]">
-              <button className="w-full px-4 py-2 font-semibold rounded-3xl bg-black text-gray-50 flex items-center justify-center gap-2">
-                <RiApps2AddFill className="text-2xl" />
-                Client Area
-              </button>
+              <NavLink to={isAdmin ? "/" : "/login"}>
+                <button
+                  className="w-full px-4 py-2 font-semibold rounded-3xl bg-black text-gray-50 flex items-center justify-center gap-2"
+                  onClick={isAdmin ? logout : null}
+                >
+                  {isAdmin ? "" : <RiApps2AddFill className="text-2xl" />}
+                  {isAdmin ? "Logout" : "Client Area"}
+                </button>
+              </NavLink>
             </div>
           </div>
-          <button className="p-4 lg:hidden">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              className="w-6 h-6 dark:text-gray-800"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h16M4 18h16"
-              ></path>
-            </svg>
-          </button>
         </div>
       </header>
     </div>
