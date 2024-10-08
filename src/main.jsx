@@ -8,6 +8,7 @@ import CheckOut from "./Pages/CheckOut.jsx";
 import Login from "./authentication/Login.jsx";
 import { AuthProvider } from "./authentication/AuthContext.jsx";
 import UpdateDelete from "./admin/UpdateDelete.jsx";
+import UpdateItem from "./admin/UpdateItem.jsx";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,12 @@ const router = createBrowserRouter([
         path: "/updateDelete",
         element:<UpdateDelete></UpdateDelete>, 
       },
+      {
+        path: "/updateItem/:id",
+        element:<UpdateItem></UpdateItem>, 
+        loader : ({params}) => fetch(`http://localhost:5000/price/${params.id}`)
+      },
+    
     
       
     ]
