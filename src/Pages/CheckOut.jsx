@@ -1,11 +1,45 @@
 import { useParams } from "react-router-dom";
+import Payment from "../payment/Payment";
 
 const CheckOut = () => {
   const { total } = useParams();
 
+  const Countries = [
+    "Afghanistan",
+    "Albania",
+    "Algeria",
+    "Andorra",
+    "Angola",
+    "Antigua and Barbuda",
+    "Argentina",
+    "Armenia",
+    "Australia",
+    "Austria",
+    "Azerbaijan",
+    "Bahamas",
+    "Bahrain",
+    "Bangladesh",
+    "Barbados",
+    "Belarus",
+    "Belgium",
+    "Belize",
+    "Benin",
+    "Bhutan",
+    "Bolivia",
+    "Bosnia and Herzegovina",
+    "Botswana",
+    "Brazil",
+    "Brunei",
+    "Bulgaria",
+    "Burkina Faso",
+    "Burundi"
+  ]
+  
+
   return (
     <div>
-      <div className="flex mx-20 mt-32">
+      <div>
+      <div className="flex gap-10 mx-20 mt-32">
         {/* form */}
         <div className="w-2/3 p-8 rounded-lg shadow-md" style={{ backgroundColor: "#050907" }}>
           <h2 className="text-2xl font-medium mb-6 text-white">Billing Details</h2>
@@ -19,7 +53,8 @@ const CheckOut = () => {
                 <input
                   type="text"
                   id="firstName"
-                  className="mt-1 block w-full p-2  rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                  placeholder="First Name"
+                  className="mt-1 block w-full p-2 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                   style={{ backgroundColor: "#222624", color: "white" }}
                   required
                 />
@@ -31,6 +66,7 @@ const CheckOut = () => {
                 <input
                   type="text"
                   id="lastName"
+                  placeholder="Last Name"
                   className="mt-1 block w-full p-2 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                   style={{ backgroundColor: "#222624", color: "white" }}
                   required
@@ -46,6 +82,7 @@ const CheckOut = () => {
               <input
                 type="text"
                 id="companyName"
+                placeholder="Company Name"
                 className="mt-1 block w-full p-2 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                 style={{ backgroundColor: "#222624", color: "white" }}
               />
@@ -56,13 +93,19 @@ const CheckOut = () => {
               <label htmlFor="country" className="block text-sm text-gray-300">
                 Country / Region *
               </label>
-              <input
-                type="text"
+              <select
                 id="country"
-                className="mt-1 block w-full p-2  rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                style={{ backgroundColor: "#222624", color: "white" }}
+                className="mt-1 block w-full p-2 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                style={{ backgroundColor: "#222624", color: "#9CA3AF" }}
                 required
-              />
+              >
+                <option value="">Select a country / region</option>
+                {Countries.map((country, index) => (
+                  <option key={index} value={country}>
+                    {country}
+                  </option>
+                ))}
+              </select>
             </div>
 
             {/* Street Address */}
@@ -101,7 +144,7 @@ const CheckOut = () => {
               <input
                 type="text"
                 id="postCode"
-                className="mt-1 block w-full p-2  rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                className="mt-1 block w-full p-2 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                 style={{ backgroundColor: "#222624", color: "white" }}
                 required
               />
@@ -115,6 +158,7 @@ const CheckOut = () => {
               <input
                 type="tel"
                 id="phone"
+                placeholder="Phone"
                 className="mt-1 block w-full p-2 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                 style={{ backgroundColor: "#222624", color: "white" }}
                 required
@@ -123,27 +167,28 @@ const CheckOut = () => {
 
             {/* Email */}
             <div className="mb-4">
-              <label htmlFor="email" className="block text-sm  text-gray-300">
+              <label htmlFor="email" className="block text-sm text-gray-300">
                 Email *
               </label>
               <input
                 type="email"
                 id="email"
-                className="mt-1 block w-full p-2  rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                placeholder="Email address"
+                className="mt-1 block w-full p-2 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                 style={{ backgroundColor: "#222624", color: "white" }}
                 required
               />
             </div>
-
-         
           </form>
         </div>
 
         {/* payment */}
-        <div className="w-1/2 p-8">
-          {/* You can add your payment section here */}
+        <div className="w-1/2 ">
+        
+        <Payment></Payment>
         </div>
       </div>
+    </div>
     </div>
   );
 };
