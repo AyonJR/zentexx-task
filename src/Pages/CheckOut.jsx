@@ -185,7 +185,7 @@ const CheckOut = () => {
         {/* payment */}
         <div className="w-1/2 ">
         
-        <Payment></Payment>
+        <Payment total={total}></Payment>
         </div>
       </div>
     </div>
