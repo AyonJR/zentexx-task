@@ -39,9 +39,9 @@ const CheckOut = () => {
   return (
     <div>
       <div>
-      <div className="flex gap-10 mx-20 mt-32">
+      <div className="flex lg:flex-row flex-col gap-10 lg:mx-20 mx-5 mt-32">
         {/* form */}
-        <div className="w-2/3 p-8 rounded-lg shadow-md" style={{ backgroundColor: "#050907" }}>
+        <div className="lg:w-2/3 p-8 rounded-lg shadow-md" style={{ backgroundColor: "#050907" }}>
           <h2 className="text-2xl font-medium mb-6 text-white">Billing Details</h2>
           <form>
             {/* First Name and Last Name */}
@@ -183,7 +183,7 @@ const CheckOut = () => {
         </div>
 
         {/* payment */}
-        <div className="w-1/2 ">
+        <div className="lg:w-1/2 ">
         
         <Payment total={total}></Payment>
         </div>

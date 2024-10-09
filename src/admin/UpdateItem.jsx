@@ -24,7 +24,7 @@ const UpdateItem = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`http://localhost:5000/price/${item._id}`, {
+      const response = await fetch(`https://task-server-rho-peach.vercel.app/price/${item._id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",

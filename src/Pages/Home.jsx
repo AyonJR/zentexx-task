@@ -20,7 +20,7 @@ const Home = () => {
   const handleStandardFunding = () => {
     const fetchStandardFunding = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/standardFunding");
+        const response = await axios.get("https://task-server-rho-peach.vercel.app/standardFunding");
         setStandardFunding(response.data);
       } catch (error) {
         console.error("Error fetching standard funding data:", error);
@@ -35,7 +35,7 @@ const Home = () => {
   const handleInstantFunding = () => {
     const fetchInstantFunding = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/instantFunding");
+        const response = await axios.get("https://task-server-rho-peach.vercel.app/instantFunding");
         setInstantFunding(response.data);
       } catch (error) {
         console.error("Error fetching instant funding data:", error);
@@ -49,7 +49,7 @@ const Home = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/price`);
+        const response = await axios.get(`https://task-server-rho-peach.vercel.app/price`);
         setPrice(response.data);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -94,7 +94,7 @@ const Home = () => {
       </div>
 
       {/* Funding options */}
-      <div className="flex justify-center mt-8">
+      <div className="flex lg:flex-row flex-col justify-center mt-8">
         <div className="flex gap-5 text-[#77FED6]">
           <button
             onClick={handleStandardFunding}
@@ -121,8 +121,8 @@ const Home = () => {
       </div>
 
       {/* Price ranges */}
-      <div className="mt-5 flex justify-center">
-        <div className="flex gap-5 text-[#77FED6]">
+      <div className="mt-5 flex  justify-center">
+        <div className="flex lg:flex-row flex-col gap-5 text-[#77FED6]">
           <button
             onClick={() => filterPricingData("10000")}
             className={`w-[140px] border border-[#77FED6] py-2 rounded-3xl ${
@@ -177,8 +177,8 @@ const Home = () => {
       </div>
 
       {/* Table and the card */}
-      <div className="flex w-full mt-10 gap-10">
-        <div className="w-2/3 ml-20">
+      <div className="flex lg:flex-row flex-col w-full mt-10 gap-10">
+        <div className="lg:w-2/3 lg:ml-20">
           <Funding
             fundingData={selectedButton === "standard" ? standardFunding : instantFunding}
             pricingData={filteredPricing} 
@@ -186,7 +186,7 @@ const Home = () => {
         </div>
 
         {/* Cards */}
-        <div className="w-1/3 mr-20">
+        <div className="lg:w-1/3 lg:mr-20">
           <Cards total={total} />
         </div>
       </div>

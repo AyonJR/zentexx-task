@@ -10,7 +10,7 @@ const Cards = ({ total }) => {
 
   return (
     <div>
-      <div className="p-5 rounded-3xl shadow-md border border-[#77FED6]">
+      <div className="p-5 rounded-3xl shadow-md border lg:mx-0 mx-5 border-[#77FED6]">
         <h2 className="text-2xl font-semibold text-white">Pick Challenge</h2>
         <p className="dark:text-gray-400 mt-6">
           The Challenge is your initial dive into becoming a Titan Trader. Prove your trading skills, hit the profit target, maintain discipline, and showcase responsible risk management.

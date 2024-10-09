@@ -11,7 +11,7 @@ const UpdateDelete = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/price`);
+        const response = await axios.get(`https://task-server-rho-peach.vercel.app/price`);
         setPrices(response.data);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -28,7 +28,7 @@ const UpdateDelete = () => {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`http://localhost:5000/price/${deleteId}`);
+      await axios.delete(`https://task-server-rho-peach.vercel.app/price/${deleteId}`);
       setPrices(prices.filter((price) => price._id !== deleteId)); // Update state after delete
       toast.success("Item deleted successfully!");
     } catch (error) {

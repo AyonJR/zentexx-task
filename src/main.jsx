@@ -34,7 +34,7 @@ const router = createBrowserRouter([
       {
         path: "/updateItem/:id",
         element:<UpdateItem></UpdateItem>, 
-        loader : ({params}) => fetch(`http://localhost:5000/price/${params.id}`)
+        loader : ({params}) => fetch(`https://task-server-rho-peach.vercel.app/price/${params.id}`)
       },
     
     
